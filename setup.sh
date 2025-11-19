@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd $HOME
+
 flatpak uninstall --assumeyes --noninteractive org.mozilla.firefox
 flatpak install --assumeyes --noninteractive com.google.Chrome
 flatpak install --assumeyes --noninteractive flathub com.bitwarden.desktop

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo echo Staring dev installation
 
 curl https://raw.githubusercontent.com/modfin/aeon-desk/refs/heads/master/setup.sh | bash
 
@@ -103,7 +104,7 @@ EOF
 
 
 ## Adding Podman / Docker hooks
-
+echo Installing podman compose (needs sudo)
 sudo transactional-update pkg in podman-compose
 
 cat << 'EOF' | tee -a .zshrc .bashrc

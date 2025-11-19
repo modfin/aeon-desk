@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd $HOME
 sudo echo Staring dev installation
 
 curl https://raw.githubusercontent.com/modfin/aeon-desk/refs/heads/master/setup.sh | bash

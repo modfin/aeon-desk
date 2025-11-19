@@ -34,4 +34,5 @@ gsettings set org.gnome.desktop.interface document-font-name 'Open Sans 11'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Open Sans Bold 11'
 
 ## Tools
-distrobox enter tumbleweed -- sudo zypper --non-interactive install nano git htop btop sensors
+distrobox create --name defualt --additional-packages "git nano vim htop btop sensors zsh fzf"
+

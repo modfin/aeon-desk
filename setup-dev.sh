@@ -4,9 +4,9 @@
 curl https://raw.githubusercontent.com/modfin/aeon-desk/refs/heads/master/setup.sh | bash
 
 
-flatpak install --assumeyes --noninteractive flathub us.zoom.Zoom
-
-
+flatpak install --assumeyes --noninteractive flathub com.visualstudio.code
+flatpak install --assumeyes --noninteractive flathub com.jetbrains.IntelliJ-IDEA-Ultimate
+flatpak install --assumeyes --noninteractive flathub com.jetbrains.GoLand
 
 ## Installing Oh my zsh
 distrobox enter default -- sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

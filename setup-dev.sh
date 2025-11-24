@@ -71,12 +71,6 @@ chmod +x $HOME/.local/bin/kubectl
   kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
 
 
-cat << 'EOF' | tee -a .zshrc .bashrc
-
-## k8s
-alias k="kubectl"
-EOF
-
   ## Install k8s krew
 cat << 'EOF' | distrobox enter default
   cd "$(mktemp -d)"
@@ -96,10 +90,15 @@ EOF
 cat << 'EOF' | distrobox enter default
 kubectl krew install ctx
 kubectl krew install ns
+kubectl krew install stern
 EOF
 
 cat << 'EOF' | tee -a .zshrc .bashrc
+
+## k8s
+alias k="kubectl"
 alias kubectx="kubectl ctx"
+alias stern="kubectl stern"
 EOF
 
 
@@ -110,10 +109,10 @@ sudo transactional-update pkg in podman-compose
 
 cat << 'EOF' | tee -a .zshrc .bashrc
 
-## Docker hooks
+## Docker hooks to host
 alias podman="distrobox-host-exec podman"
 alias docker=podman
-alias podman-compose="podman compose"
+alias podman-compose="distrobox-host-exec podman compose"
 alias docker-compose=podman-compose
 EOF
 

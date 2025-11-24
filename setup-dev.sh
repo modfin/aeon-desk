@@ -3,15 +3,19 @@
 cd $HOME
 sudo echo Staring dev installation
 
-curl https://raw.githubusercontent.com/modfin/aeon-desk/refs/heads/master/setup.sh | bash
+## Adding Podman / Docker hooks
+echo "Installing podman compose (needs sudo)"
+sudo transactional-update pkg in -y -l podman-compose
 
+
+curl https://raw.githubusercontent.com/modfin/aeon-desk/refs/heads/master/setup.sh | bash
 
 flatpak install --assumeyes --noninteractive flathub com.visualstudio.code
 flatpak install --assumeyes --noninteractive flathub com.jetbrains.IntelliJ-IDEA-Ultimate
 flatpak install --assumeyes --noninteractive flathub com.jetbrains.GoLand
 
 ## Installing Oh my zsh
-distrobox enter default -- sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+echo "curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh" | distrobox enter
 
 cat << 'EOF' >> .zshrc 
 
@@ -26,12 +30,13 @@ EOF
 
 
 ## Installing Google Cloud Tools
-distrobox enter default -- bash -c "
+cat << 'EOF' | distrobox enter
   mkdir -p .google
   cd .google
   curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
   tar -xf google-cloud-cli-linux-x86_64.tar.gz 
-  ./google-cloud-sdk/install.sh --quiet"
+  ./google-cloud-sdk/install.sh --quiet
+EOF
 
 cat << 'EOF' >> .bashrc
 
@@ -48,13 +53,6 @@ source ~/.google/google-cloud-sdk/completion.zsh.inc
 EOF
 
 
-
-
-
-
-
-
-
 ## k8s tools
 curl -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" > $HOME/.local/bin/kubectl
 chmod +x $HOME/.local/bin/kubectl
@@ -64,15 +62,17 @@ chmod +x $HOME/.local/bin/kubectl
     printf "
     # kubectl shell completion
     source '$HOME/.kube/completion.bash.inc'
-    " >> $HOME/.bash_profile
-    source $HOME/.bash_profile
+    " >> $HOME/.bashrc
   
   ### autocompleat for zsh
   kubectl completion zsh > "$HOME/.oh-my-zsh/completions/_kubectl"
 
 
-  ## Install k8s krew
-cat << 'EOF' | distrobox enter default
+
+
+
+## Install k8s krew
+cat << 'EOF' | distrobox enter
   cd "$(mktemp -d)"
   OS="$(uname | tr '[:upper:]' '[:lower:]')"
   ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
@@ -87,7 +87,7 @@ cat << 'EOF' | tee -a .zshrc .bashrc
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 EOF
 
-cat << 'EOF' | distrobox enter default
+cat << 'EOF' | distrobox enter
 kubectl krew install ctx
 kubectl krew install ns
 kubectl krew install stern
@@ -103,9 +103,6 @@ EOF
 
 
 
-## Adding Podman / Docker hooks
-echo "Installing podman compose (needs sudo)"
-sudo transactional-update pkg in podman-compose
 
 cat << 'EOF' | tee -a .zshrc .bashrc
 
@@ -115,6 +112,7 @@ alias docker=podman
 alias podman-compose="distrobox-host-exec podman compose"
 alias docker-compose=podman-compose
 EOF
+
 
 
 

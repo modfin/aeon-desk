@@ -32,11 +32,15 @@ gsettings set org.gnome.desktop.background picture-options 'zoom'
 ## Setting windows header
 gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 
+## Adding fractional Scaling support
+gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
+
+
 ## Setting fonts
 gsettings set org.gnome.desktop.interface font-name 'Open Sans 11'
 gsettings set org.gnome.desktop.interface document-font-name 'Open Sans 11'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Open Sans Bold 11'
 
 ## Tools
-distrobox create --name default --additional-packages "git nano vim htop btop sensors zsh fzf bind-utils"
+distrobox create --additional-packages "git nano vim htop btop sensors zsh fzf bind-utils"
 

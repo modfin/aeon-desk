@@ -33,6 +33,7 @@ gsettings set org.gnome.desktop.background picture-options 'zoom'
 gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 
 ## Adding fractional Scaling support
+## gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer', 'xwayland-native-scaling']"
 gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
 
 

@@ -20,7 +20,9 @@ gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
 
 ## Setting background
 
-BACKGROUND="$HOME/.local/share/backgrounds/mf.bg.jpg"
+BACKGROUND_DIR="$HOME/.local/share/backgrounds"
+BACKGROUND="$BACKGROUND_DIR/mf.bg.jpg"
+mkdir -p $BACKGROUND_DIR
 curl https://raw.githubusercontent.com/modfin/aeon-desk/refs/heads/master/bg.jpg > $BACKGROUND
 echo "Setting background to $BACKGROUND"
 gsettings set org.gnome.desktop.background picture-uri $BACKGROUND

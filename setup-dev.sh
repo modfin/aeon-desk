@@ -104,7 +104,7 @@ EOF
 
 
 ## Adding Podman / Docker hooks
-echo Installing podman compose (needs sudo)
+echo "Installing podman compose (needs sudo)"
 sudo transactional-update pkg in podman-compose
 
 cat << 'EOF' | tee -a .zshrc .bashrc

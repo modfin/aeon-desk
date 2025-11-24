@@ -43,5 +43,5 @@ gsettings set org.gnome.desktop.interface document-font-name 'Open Sans 11'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Open Sans Bold 11'
 
 ## Tools
-distrobox create --additional-packages "git nano vim htop btop sensors zsh fzf bind-utils"
+distrobox create --additional-packages "git git-lfs nano vim htop btop sensors zsh fzf bind-utils"
 

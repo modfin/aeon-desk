@@ -12,8 +12,8 @@ flatpak install --assumeyes --noninteractive flathub us.zoom.Zoom
 
 ## Setting focus on mouse hover
 gsettings set org.gnome.desktop.wm.preferences focus-mode 'sloppy' ##or 'mouse'
-gsettings set org.gnome.desktop.wm.preferences auto-raise true
-gsettings set org.gnome.desktop.wm.preferences auto-raise-delay 0
+# gsettings set org.gnome.desktop.wm.preferences auto-raise true
+# gsettings set org.gnome.desktop.wm.preferences auto-raise-delay 0
 
 ## Setting normal scrollingn
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
